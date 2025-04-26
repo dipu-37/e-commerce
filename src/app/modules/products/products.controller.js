@@ -1,11 +1,31 @@
 import QueryBuilder from "../../utils/QueryBuilder.js";
+import { sendImageToCloudinary } from "../../utils/sendImageToCloudinary.js";
 import { Product } from "./products.model.js";
 
 
 // Create a product (admin only)
 export const createProduct = async (req, res) => {
+ // console.log(req.file,'file');
+  const payload = JSON.parse(req.body.data);
+  // console.log(payload);
+  // console.log(payload.images,'image --')
+  // console.log(payload.name,'name --')
+
+  if(req.file)
+  {
+    const imageName = `${payload.name}`
+    const path = req.file?.path;
+    //console.log(path);
+
+    // send image to cloudinary
+
+    const {secure_url} = await sendImageToCloudinary(imageName,path);
+    payload.images = secure_url;
+    //console.log(secure_url,'secure url');
+  }
   try {
-    const newProduct = await Product.create(req.body);
+
+    const newProduct = await Product.create(payload);
     console.log(newProduct)
     res.status(201).json({
       success: true,

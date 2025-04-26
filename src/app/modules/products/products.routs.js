@@ -1,3 +1,4 @@
+import { upload } from '../../utils/sendImageToCloudinary.js';
 import { createProduct, deleteProduct, getProductById, getProducts, updateProduct } from './products.controller.js';
 
 import express from 'express'; 
@@ -12,7 +13,7 @@ router.get("/", getProducts);
 router.get("/:id", getProductById);
 
 // POST http://localhost:3000/api/v1/products/ (admin only)
-router.post("/", createProduct);
+router.post("/create-product",upload.single('file'), createProduct);
 
 // PUT /api/products/:id - Update a product (admin only)
 router.put("/:id", updateProduct);

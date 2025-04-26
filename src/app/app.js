@@ -7,6 +7,11 @@ import { orderRoutes } from './modules/orders/orders.routs.js';
 import { reviewRoutes } from './modules/reviews/reviews.routes.js';
 import { AuthRoutes } from './modules/auth/auth.routes.js';
 import cookieParser from 'cookie-parser';
+import 'dotenv/config'
+
+
+
+
 const app = express();
 app.use(cookieParser())
 
@@ -27,12 +32,11 @@ app.use('/api/v1/reviews', reviewRoutes);
 app.use('/api/v1/auth', AuthRoutes);
 
 
-
 // Database connect
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-dipu');
+  await mongoose.connect(process.env.MONGODB_URL);
   console.log('Database connected successfully');
 }
 
