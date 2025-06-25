@@ -5,9 +5,9 @@ import { Product } from "./products.model.js";
 
 // Create a product (admin only)
 export const createProduct = async (req, res) => {
- // console.log(req.file,'file');
+   console.log(req.file,'file');
   const payload = JSON.parse(req.body.data);
-  // console.log(payload);
+   console.log(payload);
   // console.log(payload.images,'image --')
   // console.log(payload.name,'name --')
 
