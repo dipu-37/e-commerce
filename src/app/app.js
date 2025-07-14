@@ -7,24 +7,19 @@ import { orderRoutes } from './modules/orders/orders.routs.js';
 import { reviewRoutes } from './modules/reviews/reviews.routes.js';
 import { AuthRoutes } from './modules/auth/auth.routes.js';
 import cookieParser from 'cookie-parser';
-import 'dotenv/config'
-
-
-
+import 'dotenv/config';
 
 const app = express();
-app.use(cookieParser())
-
-const port = 3000;
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['https://e-commerce-frontend.vercel.app', 'http://localhost:5173'], // 🔁 Replace with your frontend Vercel URL
   credentials: true
 }));
 
 app.get('/', (req, res) => {
-  res.send('This is my first project');
+  res.send('This is my first project on Vercel!');
 });
 
 // Routes
@@ -34,18 +29,19 @@ app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
 app.use('/api/v1/auth', AuthRoutes);
 
-
-// Database connect
-main().catch(err => console.log(err));
-
+// MongoDB connection
+let isConnected = false;
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL);
-  console.log('Database connected successfully');
+  try {
+    if (!isConnected) {
+      await mongoose.connect(process.env.MONGODB_URL);
+      isConnected = true;
+      console.log('✅ Database connected');
+    }
+  } catch (error) {
+    console.error('❌ MongoDB error:', error.message);
+  }
 }
-
-// app.listen(port, () => {
-//   console.log(`App listening on port ${port}`);
-// });
+main();
 
 export default app;
-
