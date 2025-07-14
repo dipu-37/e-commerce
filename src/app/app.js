@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(cors({
-  origin: ['https://e-commerce-frontend.vercel.app', 'http://localhost:5173'], // 🔁 Replace with your frontend Vercel URL
+  origin: ['https://ecommerce-dipu-client-1.onrender.com', 'http://localhost:5173'], // 🔁 Replace with your frontend Vercel URL
   credentials: true
 }));
 
