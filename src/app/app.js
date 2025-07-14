@@ -43,6 +43,9 @@ async function main() {
   console.log('Database connected successfully');
 }
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App listening on port ${port}`);
+// });
+
+export default app;
+
