@@ -17,7 +17,7 @@ const router = express.Router();
 router.post("/", createOrder);
 
 // GET /api/orders/my - Get current user's orders
-router.get("/my",auth('user','admin'), getMyOrders);
+router.get("/my", getMyOrders);
 
 // GET /api/orders/all - Admin: Get all orders
 router.get("/all", getAllOrders);
