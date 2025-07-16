@@ -14,7 +14,7 @@ router.get("/", getProducts);
 router.get("/:id", getProductById);
 
 // POST https://e-commerce-1-jztd.onrender.com/api/v1/products/ (admin only)
-router.post("/create-product",upload.single('file'),auth('admin') ,createProduct);
+router.post("/create-product",upload.single('file'),createProduct);
 
 // PUT /api/products/:id - Update a product (admin only)
 router.put("/:id", updateProduct);
