@@ -1,4 +1,5 @@
 import { upload } from '../../utils/sendImageToCloudinary.js';
+import { auth } from '../middleware/auth.js';
 import { createProduct, deleteProduct, getProductById, getProducts, updateProduct } from './products.controller.js';
 
 import express from 'express'; 
@@ -13,7 +14,7 @@ router.get("/", getProducts);
 router.get("/:id", getProductById);
 
 // POST https://e-commerce-1-jztd.onrender.com/api/v1/products/ (admin only)
-router.post("/create-product",upload.single('file'), createProduct);
+router.post("/create-product",upload.single('file'),auth('admin') ,createProduct);
 
 // PUT /api/products/:id - Update a product (admin only)
 router.put("/:id", updateProduct);
